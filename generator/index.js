@@ -1,30 +1,24 @@
-function createFilter(predicate) {
-	return (sequence) => {
-		console.log("filter: start");
-		function* filterGenerator() {
-			for (const item of sequence) {
-				console.log("filter:", item);
-				if (predicate(item)) {
-					yield item;
-				}
-			}
+const createFilter = (predicate) => (sequence) => {
+	console.log("filter: start");
+	function* filterGenerator() {
+		for (const item of sequence) {
+			console.log("filter:", item);
+			if (predicate(item)) yield item;
 		}
-		return filterGenerator();
-	};
-}
+	}
+	return filterGenerator();
+};
 
-function createMap(mapping) {
-	return (sequence) => {
-		console.log("map: start");
-		function* mapGenerator() {
-			for (const item of sequence) {
-				console.log("map:", item);
-				yield mapping(item);
-			}
+const createMap = (mapping) => (sequence) => {
+	console.log("map: start");
+	function* mapGenerator() {
+		for (const item of sequence) {
+			console.log("map:", item);
+			yield mapping(item);
 		}
-		return mapGenerator();
-	};
-}
+	}
+	return mapGenerator();
+};
 
 const availabilityFilter = createFilter((item) => item.isAvailable);
 
@@ -54,5 +48,5 @@ const items = [
 	},
 ];
 
-const formattedItems = Array.from(toViewMap(availabilityFilter(items)));
+const formattedItems = [...toViewMap(availabilityFilter(items))];
 console.log("result:", formattedItems);
