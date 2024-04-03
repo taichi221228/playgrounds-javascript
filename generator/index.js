@@ -1,7 +1,7 @@
 function createFilter(predicate) {
 	return (sequence) => {
 		console.log("start filter");
-		function* filterGenerator(sequence) {
+		function* filterGenerator() {
 			for (const item of sequence) {
 				console.log("---> filter", item);
 				if (predicate(item)) {
@@ -16,7 +16,7 @@ function createFilter(predicate) {
 function createMap(mapping) {
 	return (sequence) => {
 		console.log("start map");
-		function* mapGenerator(sequence) {
+		function* mapGenerator() {
 			for (const item of sequence) {
 				console.log("---> map", item);
 				yield mapping(item);
